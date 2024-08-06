@@ -6,7 +6,7 @@ class slidingText extends StatelessWidget {
     required this.slidingAnimation,
   });
 
-  final Animation<Offset> slidingAnimation;
+  final Animation< Offset> slidingAnimation;
 
   @override
   Widget build(BuildContext context) {
