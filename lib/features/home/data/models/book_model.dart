@@ -3,32 +3,29 @@ class BookModel {
   String? id;
   String? etag;
   String? selfLink;
-  VolumeInfo? volumeInfo;
+  late VolumeInfo volumeInfo;
   SaleInfo? saleInfo;
   AccessInfo? accessInfo;
   SearchInfo? searchInfo;
 
   BookModel(
       {this.kind,
-        this.id,
-        this.etag,
-        this.selfLink,
-        this.volumeInfo,
-        this.saleInfo,
-        this.accessInfo,
-        this.searchInfo});
+      this.id,
+      this.etag,
+      this.selfLink,
+      required this.volumeInfo,
+      this.saleInfo,
+      this.accessInfo,
+      this.searchInfo});
 
   BookModel.fromJson(Map<String, dynamic> json) {
     kind = json['kind'];
     id = json['id'];
     etag = json['etag'];
     selfLink = json['selfLink'];
-    volumeInfo = json['volumeInfo'] != null
-        ? VolumeInfo.fromJson(json['volumeInfo'])
-        : null;
-    saleInfo = json['saleInfo'] != null
-        ? SaleInfo.fromJson(json['saleInfo'])
-        : null;
+    volumeInfo = VolumeInfo.fromJson(json['volumeInfo']);
+    saleInfo =
+        json['saleInfo'] != null ? SaleInfo.fromJson(json['saleInfo']) : null;
     accessInfo = json['accessInfo'] != null
         ? AccessInfo.fromJson(json['accessInfo'])
         : null;
@@ -43,10 +40,8 @@ class BookModel {
     data['id'] = id;
     data['etag'] = etag;
     data['selfLink'] = selfLink;
-    if (volumeInfo != null) {
-      data['volumeInfo'] = volumeInfo!.toJson();
-    }
-    if (saleInfo != null) {
+    data['volumeInfo'] = volumeInfo.toJson();
+      if (saleInfo != null) {
       data['saleInfo'] = saleInfo!.toJson();
     }
     if (accessInfo != null) {
@@ -74,7 +69,7 @@ class VolumeInfo {
   bool? allowAnonLogging;
   String? contentVersion;
   PanelizationSummary? panelizationSummary;
-  ImageLinks? imageLinks;
+  late ImageLinks imageLinks;
   String? language;
   String? previewLink;
   String? infoLink;
@@ -82,24 +77,24 @@ class VolumeInfo {
 
   VolumeInfo(
       {this.title,
-        this.authors,
-        this.publisher,
-        this.publishedDate,
-        this.description,
-        this.industryIdentifiers,
-        this.readingModes,
-        this.pageCount,
-        this.printType,
-        this.categories,
-        this.maturityRating,
-        this.allowAnonLogging,
-        this.contentVersion,
-        this.panelizationSummary,
-        this.imageLinks,
-        this.language,
-        this.previewLink,
-        this.infoLink,
-        this.canonicalVolumeLink});
+      this.authors,
+      this.publisher,
+      this.publishedDate,
+      this.description,
+      this.industryIdentifiers,
+      this.readingModes,
+      this.pageCount,
+      this.printType,
+      this.categories,
+      this.maturityRating,
+      this.allowAnonLogging,
+      this.contentVersion,
+      this.panelizationSummary,
+      required this.imageLinks,
+      this.language,
+      this.previewLink,
+      this.infoLink,
+      this.canonicalVolumeLink});
 
   VolumeInfo.fromJson(Map<String, dynamic> json) {
     title = json['title'];
@@ -125,9 +120,7 @@ class VolumeInfo {
     panelizationSummary = json['panelizationSummary'] != null
         ? PanelizationSummary.fromJson(json['panelizationSummary'])
         : null;
-    imageLinks = json['imageLinks'] != null
-        ? ImageLinks.fromJson(json['imageLinks'])
-        : null;
+    imageLinks = ImageLinks.fromJson(json['imageLinks']);
     language = json['language'];
     previewLink = json['previewLink'];
     infoLink = json['infoLink'];
@@ -157,10 +150,8 @@ class VolumeInfo {
     if (panelizationSummary != null) {
       data['panelizationSummary'] = panelizationSummary!.toJson();
     }
-    if (imageLinks != null) {
-      data['imageLinks'] = imageLinks!.toJson();
-    }
-    data['language'] = language;
+    data['imageLinks'] = imageLinks.toJson();
+      data['language'] = language;
     data['previewLink'] = previewLink;
     data['infoLink'] = infoLink;
     data['canonicalVolumeLink'] = canonicalVolumeLink;
@@ -226,10 +217,10 @@ class PanelizationSummary {
 }
 
 class ImageLinks {
-  String? smallThumbnail;
-  String? thumbnail;
+  late String smallThumbnail;
+  late String thumbnail;
 
-  ImageLinks({this.smallThumbnail, this.thumbnail});
+  ImageLinks({required this.smallThumbnail, required this.thumbnail});
 
   ImageLinks.fromJson(Map<String, dynamic> json) {
     smallThumbnail = json['smallThumbnail'];
@@ -280,15 +271,15 @@ class AccessInfo {
 
   AccessInfo(
       {this.country,
-        this.viewability,
-        this.embeddable,
-        this.publicDomain,
-        this.textToSpeechPermission,
-        this.epub,
-        this.pdf,
-        this.webReaderLink,
-        this.accessViewStatus,
-        this.quoteSharingAllowed});
+      this.viewability,
+      this.embeddable,
+      this.publicDomain,
+      this.textToSpeechPermission,
+      this.epub,
+      this.pdf,
+      this.webReaderLink,
+      this.accessViewStatus,
+      this.quoteSharingAllowed});
 
   AccessInfo.fromJson(Map<String, dynamic> json) {
     country = json['country'];
