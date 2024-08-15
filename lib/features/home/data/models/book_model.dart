@@ -41,7 +41,7 @@ class BookModel {
     data['etag'] = etag;
     data['selfLink'] = selfLink;
     data['volumeInfo'] = volumeInfo.toJson();
-      if (saleInfo != null) {
+    if (saleInfo != null) {
       data['saleInfo'] = saleInfo!.toJson();
     }
     if (accessInfo != null) {
@@ -69,7 +69,7 @@ class VolumeInfo {
   bool? allowAnonLogging;
   String? contentVersion;
   PanelizationSummary? panelizationSummary;
-  late ImageLinks imageLinks;
+  ImageLinks? imageLinks;
   String? language;
   String? previewLink;
   String? infoLink;
@@ -90,7 +90,7 @@ class VolumeInfo {
       this.allowAnonLogging,
       this.contentVersion,
       this.panelizationSummary,
-      required this.imageLinks,
+      this.imageLinks,
       this.language,
       this.previewLink,
       this.infoLink,
@@ -113,14 +113,16 @@ class VolumeInfo {
         : null;
     pageCount = json['pageCount'];
     printType = json['printType'];
-    categories = json['categories'].cast<String>();
+    categories = (json['categories'] as List<dynamic>?)?.cast<String>();
     maturityRating = json['maturityRating'];
     allowAnonLogging = json['allowAnonLogging'];
     contentVersion = json['contentVersion'];
     panelizationSummary = json['panelizationSummary'] != null
         ? PanelizationSummary.fromJson(json['panelizationSummary'])
         : null;
-    imageLinks = ImageLinks.fromJson(json['imageLinks']);
+    imageLinks = json['imageLinks'] != null
+        ? ImageLinks.fromJson(json['imageLinks'])
+        : null;
     language = json['language'];
     previewLink = json['previewLink'];
     infoLink = json['infoLink'];
@@ -150,8 +152,10 @@ class VolumeInfo {
     if (panelizationSummary != null) {
       data['panelizationSummary'] = panelizationSummary!.toJson();
     }
-    data['imageLinks'] = imageLinks.toJson();
-      data['language'] = language;
+    if (imageLinks != null) {
+      data['imageLinks'] = imageLinks!.toJson();
+    }
+    data['language'] = language;
     data['previewLink'] = previewLink;
     data['infoLink'] = infoLink;
     data['canonicalVolumeLink'] = canonicalVolumeLink;
